@@ -34,7 +34,7 @@ const mapStateToProps = (state)=>{
 
 const mapDispatchToProps = (dispatch)=>{
 
-  //initial setup of te industries;
+  //initial setup of the industries;
   setIndustries(dispatch);
 
 
