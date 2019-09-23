@@ -2,36 +2,39 @@
 import mongodbConnect from '../dal/mongodb';
 import {AnonymousCredential} from "mongodb-stitch-browser-sdk";
 
+const client = Stitch.initializeDefaultAppClient("canadaweeklyearnings-voxly");
+
+const mongodb = client.getServiceClient(
+    RemoteMongoClient.factory,
+    "mongodb-atlas"
+  );    
+
+const authenticate = client.auth.loginWithCredential(new AnonymousCredential())
+const db = mongodb.db("earnings");
+
 
 //returns a promise that will be resolved with a setter; 
 function _getIndustries() {
 
-        let promise;
-        let error;
-        const query = [{"$group" : {_id:"$Industry"}}];
-
-        mongodbConnect("earnings", (db, client)=>{
+    let error;        
+    let promisse = authenticate.then(user => {
+  
+    let query = db.collection("convertcsv")
+                .aggregate([
+                  {"$group" : {_id:"$Industry"}}
+                    ]
+                )
+                //   .find([{}], { limit: 10 })
+                .asArray()                
             
-            const authenticate = client.auth.loginWithCredential(new AnonymousCredential())
-            
-            promise = authenticate.then(user => {
-      
-                    let result = db
-                    .collection("convertcsv")
-                    .aggregate(query)
-                    .asArray()                
-                
-                return result;
-
-            }).catch((e)=> { error = e;})
-            
-        });
-     
-            if(promise){
-                return promise;
-            } else {
-                throw error;
-            }    
+                return query;
+        }).catch((e)=> { error = e;})
+ 
+    if(promisse){
+        return promisse;
+    } else {
+        throw error;
+    }     
        }
 
  function setIndustries(dispatch){
