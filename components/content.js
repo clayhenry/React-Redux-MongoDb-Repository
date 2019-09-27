@@ -6,23 +6,20 @@ class Content extends Component {
 
         render(){
             return (
-
             <React.Fragment>
+                    
                     <div className="content">
-
                         <ul>
-                            {this.props.industries.map((e, i)=>
-                                <li key={i}>{e}</li>
+                        {this.props.industries.map((e, i)=>
+                            <li key={i}>{e}</li>
                         )}
                         </ul>
-
                     </div>
               
              </React.Fragment>
 
             );
         }
-
 }
 
 const mapStateToProps = (state)=>{
@@ -31,12 +28,10 @@ const mapStateToProps = (state)=>{
     }
 }
 
-
 const mapDispatchToProps = (dispatch)=>{
 
   //initial setup of the industries;
   setIndustries(dispatch);
-
 
   //other events (example)
     return {  
@@ -51,7 +46,5 @@ const mapDispatchToProps = (dispatch)=>{
         }  
     }
 }
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Content);
