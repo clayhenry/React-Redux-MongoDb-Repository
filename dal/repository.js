@@ -24,10 +24,7 @@ function _getIndustries() {
                   {"$group" : {_id:"$Industry"}}
                     ]
                 )
-                //   .find([{}], { limit: 10 })
                 .asArray()                
-            
-               
         }).catch((e)=> { error = e;})
  
     if(promisse){
