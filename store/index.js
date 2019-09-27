@@ -1,13 +1,10 @@
 import {createStore} from 'redux';
 
-
 const initialState = {
     industries: []
 };
 
-
 const reducer = (state = initialState, action)=>{
-    console.log("reducer ", action)
 
     //always return brand new object
     switch (action.type) {
