@@ -19,7 +19,7 @@ function _getIndustries() {
     let error;        
     let promisse = authenticate.then(user => {
   
-    let query = db.collection("convertcsv")
+    return db.collection("convertcsv")
                 .aggregate([
                   {"$group" : {_id:"$Industry"}}
                     ]
@@ -27,7 +27,7 @@ function _getIndustries() {
                 //   .find([{}], { limit: 10 })
                 .asArray()                
             
-                return query;
+               
         }).catch((e)=> { error = e;})
  
     if(promisse){
